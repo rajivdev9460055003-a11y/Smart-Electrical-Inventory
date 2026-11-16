@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+shop.db
+shop_backup*.db
+Bills/
+build/
+dist/
+build_test/
+dist_test/
+*.log
+.DS_Store
