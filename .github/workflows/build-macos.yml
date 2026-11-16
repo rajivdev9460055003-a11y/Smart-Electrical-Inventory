@@ -27,8 +27,12 @@ jobs:
         run: |
           pyinstaller --clean --noconfirm "Smart Electrical Inventory.spec"
 
+      - name: Package Mac application
+        run: |
+          tar -czf Smart-Electrical-Inventory-Mac.tar.gz -C dist "Smart Electrical Inventory.app"
+
       - name: Upload Mac application
         uses: actions/upload-artifact@v4
         with:
           name: Smart-Electrical-Inventory-Mac
-          path: "dist/Smart Electrical Inventory.app"
+          path: Smart-Electrical-Inventory-Mac.tar.gz
