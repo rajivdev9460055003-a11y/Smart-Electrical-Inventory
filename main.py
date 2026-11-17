@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from datetime import datetime
 
-from database import connect_db, backup_database
+from database import connect_db, backup_database, create_tables
 from shop_setting import open_shop_settings
 from sales_records import open_sales_records
 from stock_management import open_stock_management
@@ -11,6 +11,11 @@ from expenses import open_expenses
 from billing import open_billing
 from wire_calculator import open_wire_calculator
 from inventory import open_inventory
+
+
+# ================= DATABASE INITIALIZATION =================
+
+create_tables()
 
 
 # ================= MAIN WINDOW =================
