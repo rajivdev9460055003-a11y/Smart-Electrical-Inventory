@@ -5,6 +5,47 @@ from database import connect_db
 from pathlib import Path
 import subprocess
 import platform
+import sys
+import os
+
+
+# ================= INVOICE FOLDER =================
+
+def get_invoice_folder():
+
+    app_name = "Smart Electrical Inventory & Loose-Wire Calculator"
+
+    if getattr(sys, "frozen", False):
+
+        if sys.platform == "darwin":
+            data_folder = (
+                Path.home()
+                / "Library"
+                / "Application Support"
+                / app_name
+            )
+
+        elif os.name == "nt":
+            data_folder = (
+                Path(os.environ.get("LOCALAPPDATA", Path.home()))
+                / app_name
+            )
+
+        else:
+            data_folder = (
+                Path.home()
+                / ".local"
+                / "share"
+                / app_name
+            )
+
+        bill_folder = data_folder / "Bills"
+
+    else:
+        bill_folder = Path(__file__).resolve().parent / "Bills"
+
+    bill_folder.mkdir(parents=True, exist_ok=True)
+    return bill_folder
 
 
 # ================= SHOP PROFILE =================
@@ -252,8 +293,7 @@ def open_sales_records():
         bill_id = table.item(selected[0])["values"][0]
 
         pdf_path = (
-            Path(__file__).parent
-            / "Bills"
+            get_invoice_folder()
             / f"Invoice_{bill_id}.pdf"
         )
 
@@ -294,8 +334,7 @@ def open_sales_records():
         bill_id = table.item(selected[0])["values"][0]
 
         pdf_path = (
-            Path(__file__).parent
-            / "Bills"
+            get_invoice_folder()
             / f"Invoice_{bill_id}.pdf"
         )
 
